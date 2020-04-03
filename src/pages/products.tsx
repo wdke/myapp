@@ -1,0 +1,28 @@
+import { connect } from 'umi';
+import ProductList from '@/components/ProductList';
+
+const Products = ({ dispatch, products }) => {
+  function handleDelete(id) {
+    dispatch({
+      type: 'products/delete',
+      payload: id,
+    });
+  }
+
+  function handleUpdate(id) {
+    dispatch({
+      type: 'products/update',
+      payload: id,
+    });
+  }
+  return (
+    <div>
+      <h2>List of Products</h2>
+      <ProductList onDelete={handleDelete} onUpdate={handleUpdate} products={products} />
+    </div>
+  );
+};
+
+export default connect(({ products }) => ({
+  products,
+}))(Products);
