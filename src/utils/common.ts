@@ -21,7 +21,7 @@ export const myRequest = ({ payload, method }) => {
           'T-px-Validate-Token': token,
         },
         method,
-        body: JSON.stringify({ ...payload}),
+        body: JSON.stringify({ ...payload }),
       };
     }
   } else {

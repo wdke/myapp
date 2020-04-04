@@ -1,4 +1,5 @@
-import { Table, Popconfirm, Button } from 'antd';
+import { Table, Popconfirm, Button, Form } from 'antd';
+import { Link } from 'umi';
 
 const DbMessagesList = ({ onDelete,onUpdate, dbMessages }) => {
   const columns = [
@@ -39,10 +40,10 @@ const DbMessagesList = ({ onDelete,onUpdate, dbMessages }) => {
             <Popconfirm title="Delete?" onConfirm={() => onDelete(record.id)}>
               <Button>Delete</Button>
             </Popconfirm>
+            <Link to="/dbMessages/add" ><Button>update</Button></Link>
 
-            <Popconfirm title="update?" onConfirm={() => onUpdate(record.id)}>
-              <Button>update</Button>
-            </Popconfirm>
+            {/*<Popconfirm title="update?" onConfirm={() => onUpdate(record)}>*/}
+            {/*</Popconfirm>*/}
           </div>
         );
       },

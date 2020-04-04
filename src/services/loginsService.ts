@@ -11,9 +11,22 @@ export function login({ payload }) {
     method: 'POST',
     body: JSON.stringify({ ...payload }),
   };
-  return request(host + '/api/login', options);
+  return request('/api/login', options);
+}
+
+
+export function register({ payload }) {
+  const options = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({ ...payload }),
+  };
+  return request('/api/register', options);
 }
 
 export async function changepw({ payload }) {
-  return fetch(host + '/api/user/changepw', payload);
+  return fetch('/api/user/changepw', payload);
 }

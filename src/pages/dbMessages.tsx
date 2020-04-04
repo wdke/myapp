@@ -4,21 +4,22 @@ import DbMessagesList from '@/components/DbMessagesList';
 const DbMessages = ({ dispatch, dbMessages }) => {
   function handleDelete(id) {
     dispatch({
-      type: 'dbMessages/delete',
+      type: 'dbMessages/del',
       payload: id,
     });
   }
 
-  function handleUpdate(id) {
+  function handleUpdate(data) {
     dispatch({
-      type: 'users/login',
-      payload: id,
+      type: 'dbMessages/update',
+      payload: data,
     });
   }
+
   return (
     <div>
       <h2>数据源信息管理</h2>
-      <DbMessagesList onDelete={handleDelete} onUpdate={handleUpdate} dbMessages={dbMessages} />
+      <DbMessagesList onDelete={handleDelete} onUpdate={handleUpdate} dbMessages={dbMessages}/>
     </div>
   );
 };

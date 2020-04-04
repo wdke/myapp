@@ -5,7 +5,7 @@ import { history } from 'umi';
 
 
 export default {
-  namespace: 'logins',
+  namespace: 'index',
   state: {
     token: '',
     user: {},
@@ -51,5 +51,44 @@ export default {
       }
     },
 
+    * register({ payload }, { call, put }) {
+
+      // console.log("login:",values);
+      const { data } = yield call(userService.register, { payload });
+      console.log('login:', data);
+      if (200 == data.code) {
+        message.success('注册成功');
+
+        // 跳转到指定路由
+        history.push('/');
+
+      } else {
+        message.error(data.msg);
+      }
+    },
+
+    *checkToken({ payload }, { select, put }) {
+      if (window.localStorage) {
+        const token = yield localStorage.getItem('token');
+        if (!token) {
+
+          // 跳转到指定路由
+          history.push('/');
+        }
+      } else {
+        message.error('浏览器不支持localStorage');
+      }
+    },
+  },
+  subscriptions: {
+    setup({ dispatch, history }) {
+      return history.listen(({ pathname, query }) => {
+        if (pathname !== '/') {
+          dispatch({ type: 'checkToken' });
+        } else {
+          // dispatch({ type: 'checkUser' });
+        }
+      });
+    },
   },
 };

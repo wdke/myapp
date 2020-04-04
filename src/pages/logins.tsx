@@ -1,5 +1,5 @@
 import { Card, Form, Input, Button, message } from 'antd';
-import { connect } from 'umi';
+import { connect,Link } from 'umi';
 import styles from './logins.less';
 import Drag from '../components/Ui/Drag/index';
 
@@ -14,7 +14,7 @@ const tailLayout = {
 let done = false;
 
 
-const Logins = ({ dispatch, logins }) => {
+const Logins = ({ dispatch, users }) => {
 
 
   const [form] = Form.useForm();
@@ -33,7 +33,7 @@ const Logins = ({ dispatch, logins }) => {
   function handleLogin(values) {
     console.log("handleLogin:",values);
     dispatch({
-      type: 'logins/login',
+      type: 'index/login',
       payload: values,
     });
   }
@@ -90,15 +90,14 @@ const Logins = ({ dispatch, logins }) => {
             }}/>
           </Form.Item>
 
+
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
               提交
             </Button>
 
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <Button htmlType="button" onClick={onReset}>
-              重置
-            </Button>
+            <Link to="/register">注册</Link>
           </Form.Item>
         </Form>
 
@@ -109,6 +108,6 @@ const Logins = ({ dispatch, logins }) => {
 };
 
 
-export default connect(({ logins }) => ({
-  logins,
+export default connect(({ users }) => ({
+  users,
 }))(Logins);
